@@ -39,6 +39,9 @@ while True:
     if opcao == '1':
         os.system('cls')
         print(15*'-')
+        email = input('Digite o seu email: ').lower()
+        os.system('cls')
+        print(15*'-')
         nome = input('Digite o seu nome: ').upper()
         os.system('cls')
         print(15*'-')
@@ -47,8 +50,8 @@ while True:
         # Verifica-se se a idade recebida não é inválida e se o usuário já existe
 
         if idade >= 0 and idade < 120:
-            if nome not in usuarios:
-                usuarios[nome] = {'Nome' : nome, 'Idade' : idade}
+            if email not in usuarios:
+                usuarios[email] = {'Nome' : nome, 'Idade' : idade}
                 os.system('cls')
                 print(f'O usuário {nome} foi cadastrado com sucesso!\n')
             else:
@@ -65,6 +68,7 @@ while True:
         if usuarios:
 
             # Com o for, ele percorre todo o dicionário contendo os usuários, permitindo exibir suas informações na tela
+            # Por questões de segurança, o email do usuário não será exibido para que não possa ser editado por terceiros
 
             for chave, dados in usuarios.items():
                 print(25*'-')
@@ -78,18 +82,19 @@ while True:
     elif opcao == '3':
         os.system('cls')
 
-        # Recebimento do nome de usuário alvo
+        # Recebimento do email de usuário alvo
 
-        user = input('Digite o nome do usuário que deseja atualizar: ').upper()
+        user = input('Digite o email do usuário que deseja atualizar: ').lower()
         if user in usuarios:
 
             # Aqui o sistema recebe a nova idade
+            name = input('Digite o novo nome: ').upper()
             age = int(input('Digite a nova idade: '))
-            
+
             # O sistema verifica se a idade é válida. Ele realiza a atualização caso seja válida
 
             if age >= 0 and age < 120:
-                usuarios[user] = {'Nome' : user, 'Idade' : age}
+                usuarios[user] = {'Nome' : name, 'Idade' : age}
             else:
                 print('Idade inválida.')
         else:
@@ -100,9 +105,9 @@ while True:
     elif opcao == '4':
         os.system('cls')
 
-        # Aqui o sistema recebe o nome do usuário alvo
+        # Aqui o sistema recebe o email do usuário alvo
 
-        remover = input('Digite o usuário que deseja remover: ').upper()
+        remover = input('Digite o email do usuário que deseja remover: ').lower()
 
         # Ele verifica se ele se encontra cadastrado no sistema e o deleta
 
